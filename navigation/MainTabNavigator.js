@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import GroceriesScreen from '../screens/GroceriesScreen';
+import MenuScreen from '../screens/MenuScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -12,44 +12,44 @@ const config = Platform.select({
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const GroceriesStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Groceries: GroceriesScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+GroceriesStack.navigationOptions = {
+  tabBarLabel: 'Groceries',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? "ios-cart"
+          : 'md-cart'
       }
     />
   ),
 };
 
-HomeStack.path = '';
+GroceriesStack.path = '';
 
-const LinksStack = createStackNavigator(
+const MenuStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Menu: MenuScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+MenuStack.navigationOptions = {
+  tabBarLabel: 'Menu',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'} />
   ),
 };
 
-LinksStack.path = '';
+MenuStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -68,8 +68,8 @@ SettingsStack.navigationOptions = {
 SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
+  GroceriesStack,
+  MenuStack,
   SettingsStack,
 });
 
